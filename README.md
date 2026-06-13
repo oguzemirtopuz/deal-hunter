@@ -2,8 +2,6 @@
 
 A modern, fast, and sleek web application that tracks the best game deals across Steam and Epic Games Store in real-time. Built with React and Vite.
 
-![Deal Hunter Preview](https://via.placeholder.com/1200x600/0a0a0a/10b981?text=Deal+Hunter+Preview)
-
 ## ✨ Features
 
 * **Real-time Deals:** Fetches the highest discounts instantly via the CheapShark API.

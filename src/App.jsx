@@ -51,6 +51,9 @@ function App() {
           maxPrice={maxPrice}
           setMaxPrice={setMaxPrice}
         />
+        <div className="regional-pricing-note" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '2rem', textAlign: 'center' }}>
+          * Fiyatlar ABD (Global) fiyatlarıdır. Steam bölgesel fiyatlandırması (MENA-USD) sebebiyle Türkiye'den giriş yaptığınızda Steam mağazasında daha da düşük fiyatlar görebilirsiniz.
+        </div>
         {error ? (
           <div className="error-message">{error}</div>
         ) : (
