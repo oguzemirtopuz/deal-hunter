@@ -23,7 +23,7 @@ const DealCard = ({ deal }) => {
       const data = await response.json();
       const appData = data[deal.steamAppID];
       if (appData && appData.success && appData.data && appData.data.price_overview) {
-        setTrPrice(appData.data.price_overview.final_formatted);
+        setTrPrice(appData.data.price_overview.final_formatted.replace(' USD', ''));
       } else {
         setTrPrice("Bulunamadı");
       }
