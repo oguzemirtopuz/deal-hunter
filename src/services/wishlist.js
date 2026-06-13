@@ -10,13 +10,25 @@ export const fetchSteamWishlist = async (steamInput) => {
     ? `profiles/${steamInput.trim()}`
     : `id/${steamInput.trim()}`;
 
-  const res = await fetch(`/steam-wishlist/${path}/wishlistdata/?p=0`);
+  let res;
+  try {
+    res = await fetch(`/steam-wishlist/${path}/wishlistdata/?p=0`);
+  } catch (err) {
+    // A network error or CORS error here usually means Vercel followed a redirect to Steam (302) 
+    // because the profile doesn't exist or is private.
+    throw new Error('Steam profili bulunamadı veya istek listesi gizli! (Gizlilik ayarlarından herkese açık yapmalısın)');
+  }
   
   if (!res.ok) {
-    throw new Error(`Steam profili bulunamadı veya istek listesi gizli. (${res.status})`);
+    throw new Error(`Steam sunucusuna ulaşılamadı. (${res.status})`);
   }
 
-  const data = await res.json();
+  let data;
+  try {
+    data = await res.json();
+  } catch (err) {
+    throw new Error('Steam profili bulunamadı veya istek listesi gizli! (Gizlilik ayarlarından herkese açık yapmalısın)');
+  }
 
   if (!data || Object.keys(data).length === 0) {
     throw new Error('İstek listesi boş veya gizli ayarlanmış.');
