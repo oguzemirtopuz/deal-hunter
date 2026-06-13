@@ -5,10 +5,6 @@
       "destination": "https://store.steampowered.com/api/$1"
     },
     {
-      "source": "/steam-wishlist/(.*)",
-      "destination": "https://store.steampowered.com/wishlist/$1"
-    },
-    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

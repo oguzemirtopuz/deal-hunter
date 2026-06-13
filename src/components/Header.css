@@ -54,23 +54,4 @@
   color: var(--accent-green);
 }
 
-.wishlist-trigger-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.25);
-  color: #ef4444;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.875rem;
-  font-weight: 600;
-  font-family: 'Inter', sans-serif;
-  transition: all 0.2s ease;
-}
 
-.wishlist-trigger-btn:hover {
-  background: rgba(239, 68, 68, 0.2);
-  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.15);
-}
