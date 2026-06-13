@@ -17,22 +17,22 @@ const FilterBar = ({ searchTerm, setSearchTerm, maxPrice, setMaxPrice, activeSto
       
       <div className="filters-wrapper">
         <div className="filter-item store-filters" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-          <label className="checkbox-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontWeight: '500' }}>
+          <label className="checkbox-label" style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontWeight: '500' }}>
             <input 
               type="checkbox" 
               checked={activeStores.steam}
               onChange={(e) => setActiveStores(prev => ({...prev, steam: e.target.checked}))}
-              style={{ width: '18px', height: '18px', cursor: 'pointer', accentColor: 'var(--accent-green)' }}
             />
+            <span className="checkmark"></span>
             Steam
           </label>
-          <label className="checkbox-label" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontWeight: '500' }}>
+          <label className="checkbox-label" style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontWeight: '500' }}>
             <input 
               type="checkbox" 
               checked={activeStores.epic}
               onChange={(e) => setActiveStores(prev => ({...prev, epic: e.target.checked}))}
-              style={{ width: '18px', height: '18px', cursor: 'pointer', accentColor: 'var(--accent-green)' }}
             />
+            <span className="checkmark"></span>
             Epic Games
           </label>
         </div>
