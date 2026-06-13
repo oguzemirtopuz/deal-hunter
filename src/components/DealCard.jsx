@@ -1,17 +1,40 @@
-import { ExternalLink } from 'lucide-react';
+import { useState } from 'react';
+import { ExternalLink, RefreshCw } from 'lucide-react';
 import './DealCard.css';
 
 const DealCard = ({ deal }) => {
+  const [trPrice, setTrPrice] = useState(null);
+  const [loadingTr, setLoadingTr] = useState(false);
+
   const isEpic = deal.storeID === '25' || deal.storeID === '28';
   const storeName = isEpic ? 'Epic Games' : 'Steam';
-  const storeColor = isEpic ? '#ffffff' : '#1b2838'; // Note: steam uses blueish, epic uses white/black
   
-  // Format price
   const salePrice = parseFloat(deal.salePrice).toFixed(2);
   const normalPrice = parseFloat(deal.normalPrice).toFixed(2);
   const savings = Math.round(parseFloat(deal.savings));
-
   const dealUrl = `https://www.cheapshark.com/redirect?dealID=${deal.dealID}`;
+
+  const fetchTRPrice = async () => {
+    if (!deal.steamAppID) return;
+    setLoadingTr(true);
+    try {
+      const url = `https://store.steampowered.com/api/appdetails?appids=${deal.steamAppID}&cc=tr&filters=price_overview`;
+      const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+      const response = await fetch(proxyUrl);
+      const data = await response.json();
+      const appData = data[deal.steamAppID];
+      if (appData && appData.success && appData.data && appData.data.price_overview) {
+        setTrPrice(appData.data.price_overview.final_formatted);
+      } else {
+        setTrPrice("Bulunamadı");
+      }
+    } catch (err) {
+      console.error("Fiyat çekilemedi:", err);
+      setTrPrice("Hata");
+    } finally {
+      setLoadingTr(false);
+    }
+  };
 
   return (
     <div className="deal-card glass-panel animate-fade-in">
@@ -28,9 +51,23 @@ const DealCard = ({ deal }) => {
         </div>
         
         <div className="price-container">
-          <div className="prices">
-            <span className="normal-price">${normalPrice}</span>
-            <span className="sale-price">${salePrice}</span>
+          <div className="prices-wrapper">
+            <div className="prices">
+              <span className="normal-price">${normalPrice}</span>
+              {trPrice && trPrice !== "Bulunamadı" && trPrice !== "Hata" ? (
+                <span className="sale-price" style={{color: 'var(--accent-green)'}}>{trPrice}</span>
+              ) : (
+                <span className="sale-price">${salePrice}</span>
+              )}
+            </div>
+            {storeName === 'Steam' && deal.steamAppID && !trPrice && (
+              <button onClick={fetchTRPrice} disabled={loadingTr} className="tr-price-button">
+                {loadingTr ? <RefreshCw size={14} className="spinner" /> : "🇹🇷 TR Fiyatı"}
+              </button>
+            )}
+            {trPrice === "Bulunamadı" || trPrice === "Hata" ? (
+              <span className="tr-price-error">TR Fiyatı Alınamadı</span>
+            ) : null}
           </div>
           
           <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="buy-button">

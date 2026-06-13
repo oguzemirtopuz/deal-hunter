@@ -87,10 +87,42 @@
   gap: 0.75rem;
 }
 
+.prices-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
 .prices {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.tr-price-button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+  font-family: 'Inter', sans-serif;
+}
+
+.tr-price-button:hover {
+  border-color: var(--accent-green);
+  color: var(--text-main);
+}
+
+.tr-price-error {
+  font-size: 0.75rem;
+  color: var(--accent-danger);
 }
 
 .normal-price {
