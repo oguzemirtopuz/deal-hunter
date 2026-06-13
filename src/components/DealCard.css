@@ -10,6 +10,11 @@
   transform: translateY(-5px);
   box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.2);
   border-color: rgba(16, 185, 129, 0.3);
+  z-index: 20;
+}
+
+.deal-card.is-expanded {
+  z-index: 60;
 }
 
 .card-image-wrapper {

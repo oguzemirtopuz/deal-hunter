@@ -127,7 +127,7 @@ const DealCard = ({ deal }) => {
 
   return (
     <>
-      <div className="deal-card glass-panel animate-fade-in" ref={cardRef}>
+      <div className={`deal-card glass-panel animate-fade-in ${expanded ? 'is-expanded' : ''}`} ref={cardRef}>
         <div className="card-image-wrapper">
           <img src={deal.thumb} alt={deal.title} className="card-image" loading="lazy" />
           <div className="discount-badge">-{savings}%</div>
