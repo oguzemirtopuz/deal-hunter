@@ -14,6 +14,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [maxPrice, setMaxPrice] = useState(50); // max price 50 default
   const [activeStores, setActiveStores] = useState({ steam: true, epic: true });
+  const [sortBy, setSortBy] = useState('Savings');
 
   useEffect(() => {
     const loadDeals = async () => {
@@ -35,7 +36,8 @@ function App() {
         const data = await fetchDeals({ 
           title: searchTerm, 
           upperPrice: maxPrice,
-          storeID: storeQuery
+          storeID: storeQuery,
+          sortBy: sortBy
         });
         setDeals(data);
       } catch (err) {
@@ -52,7 +54,7 @@ function App() {
     }, 500);
 
     return () => clearTimeout(timeoutId);
-  }, [searchTerm, maxPrice, activeStores]);
+  }, [searchTerm, maxPrice, activeStores, sortBy]);
 
   return (
     <div className="app-container">
@@ -65,6 +67,8 @@ function App() {
           setMaxPrice={setMaxPrice}
           activeStores={activeStores}
           setActiveStores={setActiveStores}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
         />
         <div className="regional-pricing-note" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '2rem', textAlign: 'center', lineHeight: '1.5' }}>
           * Fiyatlar ABD (Global) fiyatlarıdır. Bölgesel fiyatlandırma sebebiyle linklere tıkladığınızda;<br/>

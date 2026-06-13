@@ -42,10 +42,32 @@ const FilterBar = ({ searchTerm, setSearchTerm, maxPrice, setMaxPrice, activeSto
             type="range" 
             min="1" 
             max="50" 
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(parseInt(e.target.value))}
+            value={maxPrice} 
+            onChange={(e) => setMaxPrice(Number(e.target.value))}
             className="price-slider"
           />
+        </div>
+        
+        <div className="filter-item sort-filter" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Sıralama</label>
+          <select 
+            value={sortBy} 
+            onChange={(e) => setSortBy(e.target.value)}
+            style={{ 
+              background: 'var(--bg-main)', 
+              color: 'var(--text-main)', 
+              border: '1px solid var(--border)', 
+              padding: '0.4rem 0.8rem', 
+              borderRadius: '6px',
+              outline: 'none',
+              cursor: 'pointer'
+            }}
+          >
+            <option value="Savings">En Yüksek İndirim</option>
+            <option value="PriceAsc">En Düşük Fiyat</option>
+            <option value="PriceDesc">En Yüksek Fiyat</option>
+            <option value="Metacritic">Metacritic Puanı</option>
+          </select>
         </div>
       </div>
     </div>
