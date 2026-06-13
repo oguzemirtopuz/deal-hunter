@@ -10,6 +10,11 @@ export default defineConfig({
         target: 'https://store.steampowered.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/steam-api/, '/api')
+      },
+      '/steam-wishlist': {
+        target: 'https://store.steampowered.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/steam-wishlist/, '/wishlist')
       }
     }
   }
