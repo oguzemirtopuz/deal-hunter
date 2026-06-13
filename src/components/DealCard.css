@@ -214,6 +214,7 @@
   justify-content: center;
   transition: all 0.2s ease;
   flex-shrink: 0;
+  margin-right: 2px;
 }
 
 .alert-button:hover {

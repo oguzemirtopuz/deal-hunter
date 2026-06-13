@@ -4,15 +4,17 @@ import './PriceAlertModal.css';
 
 const PriceAlertModal = ({ deal, onClose }) => {
   const [email, setEmail] = useState('');
-  const [targetPrice, setTargetPrice] = useState('');
   const [status, setStatus] = useState(null); // 'success' | 'error' | 'loading'
 
+  // Send alert at price 0.01 — CheapShark interprets this as "alert me when any deal exists"
+  // or use current salePrice so they get alerted when it drops to current or below
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email || !targetPrice) return;
+    if (!email) return;
     setStatus('loading');
     try {
-      const url = `https://www.cheapshark.com/api/1.0/alerts?action=set&email=${encodeURIComponent(email)}&gameID=${deal.gameID}&price=${targetPrice}`;
+      // Using 0 triggers notification whenever the game has any active deal
+      const url = `https://www.cheapshark.com/api/1.0/alerts?action=set&email=${encodeURIComponent(email)}&gameID=${deal.gameID}&price=${deal.salePrice}`;
       const res = await fetch(url);
       const text = await res.text();
       if (text === 'true') {
@@ -32,16 +34,21 @@ const PriceAlertModal = ({ deal, onClose }) => {
         
         <div className="modal-header">
           <Bell size={24} className="modal-icon" />
-          <h2>Fiyat Alarmı Kur</h2>
+          <h2>İndirim Bildirimi</h2>
         </div>
         
         <p className="modal-game-title">{deal.title}</p>
-        <p className="modal-current-price">Güncel fiyat: <strong>${parseFloat(deal.salePrice).toFixed(2)}</strong></p>
+        <p className="modal-current-price">
+          Şu anki indirimli fiyat: <strong>${parseFloat(deal.salePrice).toFixed(2)}</strong>
+        </p>
 
         {status === 'success' ? (
           <div className="modal-success">
             <span>✅</span>
-            <p>Alarm kuruldu! Oyun hedef fiyata düştüğünde <strong>{email}</strong> adresine e-posta gönderilecek.</p>
+            <p>
+              Bildirim kaydedildi! <strong>{email}</strong> adresine bu oyun indirime girdiğinde
+              veya fiyatı düştüğünde otomatik e-posta gönderilecek.
+            </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="modal-form">
@@ -55,27 +62,21 @@ const PriceAlertModal = ({ deal, onClose }) => {
                 required
               />
             </div>
-            <div className="modal-field">
-              <label>Hedef Fiyat ($)</label>
-              <input
-                type="number"
-                step="0.01"
-                min="0"
-                placeholder="Örn: 2.99"
-                value={targetPrice}
-                onChange={(e) => setTargetPrice(e.target.value)}
-                required
-              />
-            </div>
+
             <div className="modal-info">
               <Info size={14} />
-              <span>CheapShark, oyun bu fiyata düştüğünde sana ücretsiz bildirim gönderecek.</span>
+              <span>
+                Bu oyun indirime girdiğinde veya mevcut indirim daha da düştüğünde
+                CheapShark sana ücretsiz e-posta bildirim gönderecek.
+              </span>
             </div>
+
             {status === 'error' && (
               <p className="modal-error">Bir hata oluştu. Lütfen tekrar dene.</p>
             )}
+
             <button type="submit" className="modal-submit" disabled={status === 'loading'}>
-              {status === 'loading' ? 'Kaydediliyor...' : '🔔 Alarm Kur'}
+              {status === 'loading' ? 'Kaydediliyor...' : '🔔 Bildirim Kur'}
             </button>
           </form>
         )}

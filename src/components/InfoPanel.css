@@ -34,6 +34,9 @@
   border: 1px solid rgba(16, 185, 129, 0.2);
   z-index: 500;
   animation: slideDown 0.25s ease;
+  background: #111111;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 @media (max-width: 640px) {
@@ -55,8 +58,8 @@
   padding: 1.25rem 1.25rem 0.5rem;
   position: sticky;
   top: 0;
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
+  background: #111111;
+  backdrop-filter: none;
   z-index: 1;
 }
 
