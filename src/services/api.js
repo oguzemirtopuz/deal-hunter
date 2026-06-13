@@ -4,7 +4,7 @@ const BASE_URL = 'https://www.cheapshark.com/api/1.0';
  * Fetch deals from CheapShark API
  * Steam storeID = 1, Epic Games storeID = 25
  */
-export const fetchDeals = async ({ title = '', upperPrice = 50, storeID = '1,25,28' }) => {
+export const fetchDeals = async ({ title = '', upperPrice = 50, storeID = '1,25' }) => {
   try {
     // Build query parameters
     const params = new URLSearchParams({

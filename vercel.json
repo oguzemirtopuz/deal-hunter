@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/steam-api/(.*)",
+      "destination": "https://store.steampowered.com/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -6,7 +6,7 @@ const DealCard = ({ deal }) => {
   const [trPrice, setTrPrice] = useState(null);
   const [loadingTr, setLoadingTr] = useState(false);
 
-  const isEpic = deal.storeID === '25' || deal.storeID === '28';
+  const isEpic = deal.storeID === '25';
   const storeName = isEpic ? 'Epic Games' : 'Steam';
   
   const salePrice = parseFloat(deal.salePrice).toFixed(2);
@@ -18,9 +18,8 @@ const DealCard = ({ deal }) => {
     if (!deal.steamAppID) return;
     setLoadingTr(true);
     try {
-      const url = `https://store.steampowered.com/api/appdetails?appids=${deal.steamAppID}&cc=tr&filters=price_overview`;
-      const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-      const response = await fetch(proxyUrl);
+      const url = `/steam-api/appdetails?appids=${deal.steamAppID}&cc=tr&filters=price_overview`;
+      const response = await fetch(url);
       const data = await response.json();
       const appData = data[deal.steamAppID];
       if (appData && appData.success && appData.data && appData.data.price_overview) {
