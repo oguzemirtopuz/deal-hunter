@@ -1,7 +1,7 @@
 import { Search, SlidersHorizontal } from 'lucide-react';
 import './FilterBar.css';
 
-const FilterBar = ({ searchTerm, setSearchTerm, maxPrice, setMaxPrice, activeStores, setActiveStores }) => {
+const FilterBar = ({ searchTerm, setSearchTerm, maxPrice, setMaxPrice, activeStores, setActiveStores, sortBy, setSortBy }) => {
   return (
     <div className="filter-bar glass-panel animate-fade-in">
       <div className="search-wrapper">
