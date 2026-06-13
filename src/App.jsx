@@ -12,9 +12,10 @@ function App() {
   
   // Filters state
   const [searchTerm, setSearchTerm] = useState('');
-  const [maxPrice, setMaxPrice] = useState(50); // max price 50 default
+  const [maxPrice, setMaxPrice] = useState(50);
   const [activeStores, setActiveStores] = useState({ steam: true, epic: true });
   const [sortBy, setSortBy] = useState('Savings');
+  const [minMetacritic, setMinMetacritic] = useState(0);
 
   useEffect(() => {
     const loadDeals = async () => {
@@ -37,7 +38,8 @@ function App() {
           title: searchTerm, 
           upperPrice: maxPrice,
           storeID: storeQuery,
-          sortBy: sortBy
+          sortBy: sortBy,
+          minMetacritic: minMetacritic
         });
         setDeals(data);
       } catch (err) {
@@ -48,13 +50,12 @@ function App() {
       }
     };
 
-    // Debounce search
     const timeoutId = setTimeout(() => {
       loadDeals();
     }, 500);
 
     return () => clearTimeout(timeoutId);
-  }, [searchTerm, maxPrice, activeStores, sortBy]);
+  }, [searchTerm, maxPrice, activeStores, sortBy, minMetacritic]);
 
   return (
     <div className="app-container">
@@ -69,6 +70,8 @@ function App() {
           setActiveStores={setActiveStores}
           sortBy={sortBy}
           setSortBy={setSortBy}
+          minMetacritic={minMetacritic}
+          setMinMetacritic={setMinMetacritic}
         />
         <div className="regional-pricing-note" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '2rem', textAlign: 'center', lineHeight: '1.5' }}>
           * Fiyatlar ABD (Global) fiyatlarıdır. Bölgesel fiyatlandırma sebebiyle linklere tıkladığınızda;<br/>

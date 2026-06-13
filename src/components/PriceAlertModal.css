@@ -1,0 +1,152 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-box {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 16px;
+  padding: 2rem;
+  position: relative;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: color 0.2s;
+  display: flex;
+}
+
+.modal-close:hover { color: var(--text-main); }
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.modal-header h2 {
+  font-size: 1.3rem;
+  color: var(--text-main);
+}
+
+.modal-icon { color: var(--accent-green); }
+
+.modal-game-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-main);
+  margin-bottom: 0.3rem;
+}
+
+.modal-current-price {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.modal-field label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.modal-field input {
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+.modal-field input:focus {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15);
+}
+
+.modal-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+}
+
+.modal-info svg { flex-shrink: 0; margin-top: 1px; color: var(--accent-green); }
+
+.modal-submit {
+  background: var(--accent-green);
+  color: #000;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  font-family: 'Outfit', sans-serif;
+}
+
+.modal-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+.modal-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.modal-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 1rem 0;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.modal-success span { font-size: 2.5rem; }
+
+.modal-error {
+  font-size: 0.85rem;
+  color: var(--accent-danger);
+}

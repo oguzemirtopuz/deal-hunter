@@ -1,4 +1,5 @@
 import { Tag } from 'lucide-react';
+import InfoPanel from './InfoPanel';
 import './Header.css';
 
 const Header = () => {
@@ -11,6 +12,7 @@ const Header = () => {
         </div>
         <nav className="nav-links">
           <a href="#" className="nav-link active">Fırsatlar</a>
+          <InfoPanel />
         </nav>
       </div>
     </header>

@@ -148,3 +148,37 @@
 .price-slider::-webkit-slider-thumb:hover {
   transform: scale(1.2);
 }
+
+.metacritic-slider::-webkit-slider-thumb {
+  background: #ec4899;
+}
+
+.sort-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sort-select {
+  background: var(--bg-main);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  padding: 0.42rem 0.8rem;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  transition: border-color 0.2s;
+}
+
+.sort-select:focus {
+  border-color: var(--accent-green);
+}
+
+.store-filters {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
