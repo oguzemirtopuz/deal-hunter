@@ -3,12 +3,21 @@
  * Returns array of { steamAppID, name, priority } objects
  */
 export const fetchSteamWishlist = async (steamInput) => {
+  let cleanInput = steamInput.trim();
+  
+  // Extract ID if user pasted a full URL
+  if (cleanInput.includes('steamcommunity.com/id/')) {
+    cleanInput = cleanInput.split('steamcommunity.com/id/')[1].replace(/\/$/, '');
+  } else if (cleanInput.includes('steamcommunity.com/profiles/')) {
+    cleanInput = cleanInput.split('steamcommunity.com/profiles/')[1].replace(/\/$/, '');
+  }
+
   // Detect if it's a Steam64 ID (pure number ~17 digits) or vanity URL
-  const isNumericId = /^\d{15,18}$/.test(steamInput.trim());
+  const isNumericId = /^\d{15,18}$/.test(cleanInput);
   
   const path = isNumericId
-    ? `profiles/${steamInput.trim()}`
-    : `id/${steamInput.trim()}`;
+    ? `profiles/${cleanInput}`
+    : `id/${cleanInput}`;
 
   let res;
   try {
