@@ -9,6 +9,10 @@ A modern, fast, and sleek web application that tracks the best game deals across
 * **Smart Filtering:** 
   * Live title search
   * Dynamic price range slider (budget control)
+* **Price History Insights:** Expanding popover showing the all-time lowest price recorded for any game.
+* **Regional Pricing:** One-click fetch for current Turkish Lira (TR) pricing for Steam games.
+* **Price Alerts:** Ability to set custom price alerts (saved locally) to never miss a deal.
+* **Review Aggregation:** Displays translated Steam review summaries and positive percentage scores.
 * **Premium Dark Mode UI:** Designed with a sleek dark aesthetic, glassmorphism effects, and neon accents.
 * **Fully Responsive:** Works flawlessly on desktop, tablet, and mobile devices.
 
