@@ -16,18 +16,6 @@ const FilterBar = ({ searchTerm, setSearchTerm, isAAA, setIsAAA, maxPrice, setMa
       </div>
       
       <div className="filters-wrapper">
-        <div className="filter-item">
-          <label className="checkbox-label">
-            <input 
-              type="checkbox" 
-              checked={isAAA}
-              onChange={(e) => setIsAAA(e.target.checked)}
-            />
-            <span className="checkmark"></span>
-            Sadece AAA (Büyük) Oyunlar
-          </label>
-        </div>
-        
         <div className="filter-item price-filter">
           <label>Maks Fiyat: ${maxPrice === 50 ? '50+' : maxPrice}</label>
           <input 
