@@ -5,7 +5,6 @@
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
-  align-self: flex-start;
 }
 
 .deal-card:hover {
@@ -115,6 +114,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  margin-top: auto;
 }
 
 .price-container {
@@ -202,10 +202,6 @@
   font-size: 0.9rem;
   font-weight: 600;
   transition: all 0.2s ease;
-  min-width: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .buy-button:hover {
