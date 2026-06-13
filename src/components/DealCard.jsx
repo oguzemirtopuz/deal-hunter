@@ -182,6 +182,9 @@ const DealCard = ({ deal }) => {
               </div>
 
               <div className="card-actions">
+                <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="buy-button">
+                  Fırsata Git <ExternalLink size={16} />
+                </a>
                 <button
                   className={`alert-button ${alertSet ? 'alert-set' : ''}`}
                   onClick={() => setShowAlert(true)}
@@ -189,9 +192,6 @@ const DealCard = ({ deal }) => {
                 >
                   <Bell size={16} fill={alertSet ? "currentColor" : "none"} />
                 </button>
-                <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="buy-button">
-                  Fırsata Git <ExternalLink size={16} />
-                </a>
               </div>
             </div>
 
