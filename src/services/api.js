@@ -7,14 +7,20 @@ const BASE_URL = 'https://www.cheapshark.com/api/1.0';
 export const fetchDeals = async ({ title = '', upperPrice = 50, storeID = '1,25', sortBy = 'Savings' }) => {
   try {
     let apiSortBy = sortBy;
-    let desc = '1'; // Default descending
+    let desc = '0';
 
-    if (sortBy === 'PriceAsc') {
+    if (sortBy === 'Savings') {
+      apiSortBy = 'Savings';
+      desc = '0'; // 0 means highest discount percentage first
+    } else if (sortBy === 'PriceAsc') {
       apiSortBy = 'Price';
-      desc = '0';
+      desc = '0'; // 0 means lowest price first
     } else if (sortBy === 'PriceDesc') {
       apiSortBy = 'Price';
-      desc = '1';
+      desc = '1'; // 1 means highest price first
+    } else if (sortBy === 'Metacritic') {
+      apiSortBy = 'Metacritic';
+      desc = '1'; // 1 means highest score first
     }
 
     // Build query parameters
