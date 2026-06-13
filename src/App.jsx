@@ -13,16 +13,29 @@ function App() {
   // Filters state
   const [searchTerm, setSearchTerm] = useState('');
   const [maxPrice, setMaxPrice] = useState(50); // max price 50 default
+  const [activeStores, setActiveStores] = useState({ steam: true, epic: true });
 
   useEffect(() => {
     const loadDeals = async () => {
+      let storeIds = [];
+      if (activeStores.steam) storeIds.push('1');
+      if (activeStores.epic) storeIds.push('25');
+      
+      const storeQuery = storeIds.join(',');
+
+      if (!storeQuery) {
+        setDeals([]);
+        setLoading(false);
+        return;
+      }
+
       setLoading(true);
       setError(null);
       try {
         const data = await fetchDeals({ 
           title: searchTerm, 
           upperPrice: maxPrice,
-          storeID: '1,25,28'
+          storeID: storeQuery
         });
         setDeals(data);
       } catch (err) {
@@ -39,7 +52,7 @@ function App() {
     }, 500);
 
     return () => clearTimeout(timeoutId);
-  }, [searchTerm, maxPrice]);
+  }, [searchTerm, maxPrice, activeStores]);
 
   return (
     <div className="app-container">
@@ -50,6 +63,8 @@ function App() {
           setSearchTerm={setSearchTerm}
           maxPrice={maxPrice}
           setMaxPrice={setMaxPrice}
+          activeStores={activeStores}
+          setActiveStores={setActiveStores}
         />
         <div className="regional-pricing-note" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '2rem', textAlign: 'center', lineHeight: '1.5' }}>
           * Fiyatlar ABD (Global) fiyatlarıdır. Bölgesel fiyatlandırma sebebiyle linklere tıkladığınızda;<br/>
