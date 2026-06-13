@@ -20,11 +20,11 @@ A modern, fast, and sleek web application that tracks the best game deals across
 * [Vite](https://vitejs.dev/) (Build tool)
 * Vanilla CSS (Custom Design System, CSS Variables)
 * [Lucide React](https://lucide.dev/) (Icons)
-* [CheapShark API](https://apidocs.cheapshark.com/) (Data Source)
+* [CheapShark API](https://apidocs.cheapshark.com/) (Data Source - **No API Key Required!**)
 
 ## 🚀 Getting Started
 
-To get a local copy up and running, follow these simple steps.
+This project is incredibly easy to set up because the underlying API is completely free. **You do NOT need to register for or configure any API keys!** Just clone the repository and start the development server.
 
 ### Prerequisites
 
