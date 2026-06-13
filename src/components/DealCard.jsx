@@ -64,6 +64,11 @@ const DealCard = ({ deal }) => {
                 {loadingTr ? <RefreshCw size={14} className="spinner" /> : "🇹🇷 TR Fiyatı"}
               </button>
             )}
+            {storeName === 'Epic Games' && (
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px', fontStyle: 'italic', marginTop: '4px' }}>
+                <span title="Epic Games mağazasına gittiğinizde bu fiyat yerel kur ile otomatik olarak TL'ye dönüşecektir.">⚠️ Mağazada TL'ye dönüşür</span>
+              </div>
+            )}
             {trPrice === "Bulunamadı" || trPrice === "Hata" ? (
               <span className="tr-price-error">TR Fiyatı Alınamadı</span>
             ) : null}
