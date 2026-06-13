@@ -31,7 +31,14 @@ const DealCard = ({ deal }) => {
   const [trPrice, setTrPrice] = useState(null);
   const [loadingTr, setLoadingTr] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [alertSet, setAlertSet] = useState(false);
+  const [alertSet, setAlertSet] = useState(() => {
+    try {
+      const savedAlerts = JSON.parse(localStorage.getItem('dealHunterAlerts') || '[]');
+      return savedAlerts.includes(deal.gameID);
+    } catch {
+      return false;
+    }
+  });
   const [expanded, setExpanded] = useState(false);
   const [priceHistory, setPriceHistory] = useState(null);
   const [loadingHistory, setLoadingHistory] = useState(false);
@@ -216,7 +223,18 @@ const DealCard = ({ deal }) => {
         <PriceAlertModal 
           deal={deal} 
           onClose={() => setShowAlert(false)} 
-          onSuccess={() => setAlertSet(true)}
+          onSuccess={() => {
+            setAlertSet(true);
+            try {
+              const savedAlerts = JSON.parse(localStorage.getItem('dealHunterAlerts') || '[]');
+              if (!savedAlerts.includes(deal.gameID)) {
+                savedAlerts.push(deal.gameID);
+                localStorage.setItem('dealHunterAlerts', JSON.stringify(savedAlerts));
+              }
+            } catch (err) {
+              console.error(err);
+            }
+          }}
         />
       )}
     </>
