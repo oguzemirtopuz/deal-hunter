@@ -31,6 +31,7 @@ const DealCard = ({ deal }) => {
   const [trPrice, setTrPrice] = useState(null);
   const [loadingTr, setLoadingTr] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [alertSet, setAlertSet] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [priceHistory, setPriceHistory] = useState(null);
   const [loadingHistory, setLoadingHistory] = useState(false);
@@ -177,11 +178,11 @@ const DealCard = ({ deal }) => {
                 Fırsata Git <ExternalLink size={16} />
               </a>
               <button
-                className="alert-button"
+                className={`alert-button ${alertSet ? 'alert-set' : ''}`}
                 onClick={() => setShowAlert(true)}
                 title="Fiyat alarmı kur"
               >
-                <Bell size={16} />
+                <Bell size={16} fill={alertSet ? "currentColor" : "none"} />
               </button>
             </div>
           </div>
@@ -198,7 +199,9 @@ const DealCard = ({ deal }) => {
               ) : priceHistory ? (
                 <>
                   <p className="history-label">📊 Tarihin En Düşük Fiyatı</p>
-                  <p className="history-value">${priceHistory.price}</p>
+                  <p className="history-value">
+                    {priceHistory.price ? `$${priceHistory.price}` : 'Ücretsiz'}
+                  </p>
                   <p className="history-date">{priceHistory.date}</p>
                 </>
               ) : (
@@ -209,7 +212,13 @@ const DealCard = ({ deal }) => {
         </div>
       </div>
 
-      {showAlert && <PriceAlertModal deal={deal} onClose={() => setShowAlert(false)} />}
+      {showAlert && (
+        <PriceAlertModal 
+          deal={deal} 
+          onClose={() => setShowAlert(false)} 
+          onSuccess={() => setAlertSet(true)}
+        />
+      )}
     </>
   );
 };

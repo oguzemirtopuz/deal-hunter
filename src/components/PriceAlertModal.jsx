@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { X, Bell, Info } from 'lucide-react';
 import './PriceAlertModal.css';
 
-const PriceAlertModal = ({ deal, onClose }) => {
+const PriceAlertModal = ({ deal, onClose, onSuccess }) => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState(null); // 'success' | 'error' | 'loading'
 
@@ -19,6 +19,7 @@ const PriceAlertModal = ({ deal, onClose }) => {
       const text = await res.text();
       if (text === 'true') {
         setStatus('success');
+        if (onSuccess) onSuccess();
       } else {
         setStatus('error');
       }
