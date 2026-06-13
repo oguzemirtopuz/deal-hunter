@@ -16,6 +16,7 @@ function App() {
   const [activeStores, setActiveStores] = useState({ steam: true, epic: true });
   const [sortBy, setSortBy] = useState('Savings');
   const [minMetacritic, setMinMetacritic] = useState(0);
+  const [minDealRating, setMinDealRating] = useState(0);
 
   useEffect(() => {
     const loadDeals = async () => {
@@ -72,6 +73,8 @@ function App() {
           setSortBy={setSortBy}
           minMetacritic={minMetacritic}
           setMinMetacritic={setMinMetacritic}
+          minDealRating={minDealRating}
+          setMinDealRating={setMinDealRating}
         />
         <div className="regional-pricing-note" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '2rem', textAlign: 'center', lineHeight: '1.5' }}>
           * Fiyatlar ABD (Global) fiyatlarıdır. Bölgesel fiyatlandırma sebebiyle linklere tıkladığınızda;<br/>
@@ -80,7 +83,7 @@ function App() {
         {error ? (
           <div className="error-message">{error}</div>
         ) : (
-          <DealsList deals={deals} loading={loading} />
+          <DealsList deals={deals.filter(d => !minDealRating || parseFloat(d.dealRating) >= minDealRating)} loading={loading} />
         )}
       </main>
     </div>

@@ -110,8 +110,14 @@
   max-width: 150px;
 }
 
-.price-container {
+.card-footer {
   margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.price-container {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -184,6 +190,7 @@
 
 .buy-button {
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
@@ -211,10 +218,10 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
   flex-shrink: 0;
+  margin-left: 0;
 }
 
 .alert-button:hover {

@@ -6,7 +6,8 @@ const FilterBar = ({
   maxPrice, setMaxPrice,
   activeStores, setActiveStores,
   sortBy, setSortBy,
-  minMetacritic, setMinMetacritic
+  minMetacritic, setMinMetacritic,
+  minDealRating, setMinDealRating
 }) => {
   return (
     <div className="filter-bar glass-panel animate-fade-in">
@@ -68,6 +69,20 @@ const FilterBar = ({
             value={minMetacritic}
             onChange={(e) => setMinMetacritic(Number(e.target.value))}
             className="price-slider metacritic-slider"
+          />
+        </div>
+
+        {/* Min Deal Rating */}
+        <div className="filter-item price-filter">
+          <label>Fırsat Skoru: {minDealRating === 0 ? 'Hepsi' : `${minDealRating}+`}</label>
+          <input
+            type="range"
+            min="0"
+            max="9.5"
+            step="0.5"
+            value={minDealRating}
+            onChange={(e) => setMinDealRating(Number(e.target.value))}
+            className="price-slider deal-rating-slider"
           />
         </div>
 

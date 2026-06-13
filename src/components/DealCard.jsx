@@ -154,68 +154,70 @@ const DealCard = ({ deal }) => {
             )}
           </div>
 
-          <div className="price-container">
-            <div className="prices-wrapper">
-              <div className="prices">
-                <span className="normal-price">${normalPrice}</span>
-                {trPrice && trPrice !== 'Bulunamadı' && trPrice !== 'Hata' ? (
-                  <span className="sale-price" style={{ color: 'var(--accent-green)' }}>{trPrice}</span>
-                ) : (
-                  <span className="sale-price">${salePrice}</span>
+          <div className="card-footer">
+            <div className="price-container">
+              <div className="prices-wrapper">
+                <div className="prices">
+                  <span className="normal-price">${normalPrice}</span>
+                  {trPrice && trPrice !== 'Bulunamadı' && trPrice !== 'Hata' ? (
+                    <span className="sale-price" style={{ color: 'var(--accent-green)' }}>{trPrice}</span>
+                  ) : (
+                    <span className="sale-price">${salePrice}</span>
+                  )}
+                </div>
+
+                {storeName === 'Steam' && deal.steamAppID && !trPrice && (
+                  <button onClick={fetchTRPrice} disabled={loadingTr} className="tr-price-button">
+                    {loadingTr ? <RefreshCw size={14} className="spinner" /> : '🇹🇷 TR Fiyatı'}
+                  </button>
+                )}
+
+                {storeName === 'Epic Games' && (
+                  <div className="epic-warning">⚠️ Mağazada TL'ye dönüşür</div>
+                )}
+
+                {(trPrice === 'Bulunamadı' || trPrice === 'Hata') && (
+                  <span className="tr-price-error">TR Fiyatı Alınamadı</span>
                 )}
               </div>
 
-              {storeName === 'Steam' && deal.steamAppID && !trPrice && (
-                <button onClick={fetchTRPrice} disabled={loadingTr} className="tr-price-button">
-                  {loadingTr ? <RefreshCw size={14} className="spinner" /> : '🇹🇷 TR Fiyatı'}
+              <div className="card-actions">
+                <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="buy-button">
+                  Fırsata Git <ExternalLink size={16} />
+                </a>
+                <button
+                  className={`alert-button ${alertSet ? 'alert-set' : ''}`}
+                  onClick={() => setShowAlert(true)}
+                  title="Fiyat alarmı kur"
+                >
+                  <Bell size={16} fill={alertSet ? "currentColor" : "none"} />
                 </button>
-              )}
-
-              {storeName === 'Epic Games' && (
-                <div className="epic-warning">⚠️ Mağazada TL'ye dönüşür</div>
-              )}
-
-              {(trPrice === 'Bulunamadı' || trPrice === 'Hata') && (
-                <span className="tr-price-error">TR Fiyatı Alınamadı</span>
-              )}
+              </div>
             </div>
 
-            <div className="card-actions">
-              <a href={dealUrl} target="_blank" rel="noopener noreferrer" className="buy-button">
-                Fırsata Git <ExternalLink size={16} />
-              </a>
-              <button
-                className={`alert-button ${alertSet ? 'alert-set' : ''}`}
-                onClick={() => setShowAlert(true)}
-                title="Fiyat alarmı kur"
-              >
-                <Bell size={16} fill={alertSet ? "currentColor" : "none"} />
-              </button>
-            </div>
+            {/* Expandable price history */}
+            <button className="expand-toggle" onClick={handleExpand}>
+              {expanded ? <><ChevronUp size={14} /> Gizle</> : <><ChevronDown size={14} /> Fiyat Geçmişi</>}
+            </button>
+
+            {expanded && (
+              <div className="price-history">
+                {loadingHistory ? (
+                  <p className="history-loading">Yükleniyor...</p>
+                ) : priceHistory ? (
+                  <>
+                    <p className="history-label">📊 Tarihin En Düşük Fiyatı</p>
+                    <p className="history-value">
+                      {priceHistory.price ? `$${priceHistory.price}` : 'Ücretsiz'}
+                    </p>
+                    <p className="history-date">{priceHistory.date}</p>
+                  </>
+                ) : (
+                  <p className="history-loading">Geçmiş fiyat bilgisi bulunamadı.</p>
+                )}
+              </div>
+            )}
           </div>
-
-          {/* Expandable price history */}
-          <button className="expand-toggle" onClick={handleExpand}>
-            {expanded ? <><ChevronUp size={14} /> Gizle</> : <><ChevronDown size={14} /> Fiyat Geçmişi</>}
-          </button>
-
-          {expanded && (
-            <div className="price-history">
-              {loadingHistory ? (
-                <p className="history-loading">Yükleniyor...</p>
-              ) : priceHistory ? (
-                <>
-                  <p className="history-label">📊 Tarihin En Düşük Fiyatı</p>
-                  <p className="history-value">
-                    {priceHistory.price ? `$${priceHistory.price}` : 'Ücretsiz'}
-                  </p>
-                  <p className="history-date">{priceHistory.date}</p>
-                </>
-              ) : (
-                <p className="history-loading">Geçmiş fiyat bilgisi bulunamadı.</p>
-              )}
-            </div>
-          )}
         </div>
       </div>
 

@@ -153,6 +153,10 @@
   background: #ec4899;
 }
 
+.deal-rating-slider::-webkit-slider-thumb {
+  background: #f59e0b;
+}
+
 .sort-filter {
   display: flex;
   flex-direction: column;
