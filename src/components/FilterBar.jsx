@@ -1,4 +1,5 @@
-import { Search } from 'lucide-react';
+import { useState } from 'react';
+import { Search, SlidersHorizontal, X } from 'lucide-react';
 import './FilterBar.css';
 
 const FilterBar = ({
@@ -9,23 +10,39 @@ const FilterBar = ({
   minMetacritic, setMinMetacritic,
   minDealRating, setMinDealRating
 }) => {
+  const [filtersOpen, setFiltersOpen] = useState(false);
+
   return (
     <div className="filter-bar glass-panel animate-fade-in">
-      <div className="search-wrapper">
-        <Search className="search-icon" size={20} />
-        <input
-          type="text"
-          placeholder="Oyun ara..."
-          className="search-input"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+      {/* Top row: search + mobile filter toggle */}
+      <div className="filter-top-row">
+        <div className="search-wrapper">
+          <Search className="search-icon" size={20} />
+          <input
+            type="text"
+            placeholder="Oyun ara..."
+            className="search-input"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+
+        {/* Mobile: filter toggle button */}
+        <button
+          className="filter-toggle-btn"
+          onClick={() => setFiltersOpen(!filtersOpen)}
+          aria-label="Filtreleri aç/kapat"
+        >
+          {filtersOpen ? <X size={18} /> : <SlidersHorizontal size={18} />}
+          <span>{filtersOpen ? 'Kapat' : 'Filtrele'}</span>
+        </button>
       </div>
 
-      <div className="filters-wrapper">
+      {/* Filters — always visible on desktop, toggled on mobile */}
+      <div className={`filters-wrapper ${filtersOpen ? 'filters-open' : ''}`}>
         {/* Store checkboxes */}
         <div className="filter-item store-filters">
-          <label className="checkbox-label" style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontWeight: '500' }}>
+          <label className="checkbox-label">
             <input
               type="checkbox"
               checked={activeStores.steam}
@@ -34,7 +51,7 @@ const FilterBar = ({
             <span className="checkmark"></span>
             Steam
           </label>
-          <label className="checkbox-label" style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontWeight: '500' }}>
+          <label className="checkbox-label">
             <input
               type="checkbox"
               checked={activeStores.epic}
@@ -88,7 +105,7 @@ const FilterBar = ({
 
         {/* Sort */}
         <div className="filter-item sort-filter">
-          <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Sıralama</label>
+          <label>Sıralama</label>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}

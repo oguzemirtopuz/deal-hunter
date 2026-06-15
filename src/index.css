@@ -47,6 +47,28 @@ a {
   padding: 0 1.5rem;
 }
 
+/* Regional note mobile */
+.regional-pricing-note {
+  padding: 0 0.5rem;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.875rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .container {
+    padding: 0 0.625rem;
+  }
+
+  .regional-pricing-note {
+    font-size: 0.78rem !important;
+  }
+}
+
 /* Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }

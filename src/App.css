@@ -8,3 +8,16 @@
   flex: 1;
   padding: 2rem 0;
 }
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1.25rem 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .main-content {
+    padding: 1rem 0;
+  }
+}

@@ -1,6 +1,6 @@
 .deals-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1.5rem;
 }
 
@@ -31,4 +31,26 @@
   background: var(--glass-bg);
   border: 1px solid var(--border);
   border-radius: 12px;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .deals-grid {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .deals-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.875rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .deals-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.625rem;
+  }
 }

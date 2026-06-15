@@ -76,7 +76,7 @@ function App() {
           minDealRating={minDealRating}
           setMinDealRating={setMinDealRating}
         />
-        <div className="regional-pricing-note" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '2rem', textAlign: 'center', lineHeight: '1.5' }}>
+        <div className="regional-pricing-note" style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1.5rem', textAlign: 'center', lineHeight: '1.5' }}>
           * Fiyatlar ABD (Global) fiyatlarıdır. Bölgesel fiyatlandırma sebebiyle linklere tıkladığınızda;<br/>
           Steam'de <b>MENA-USD</b>, Epic Games'te ise <b>Türk Lirası (TRY)</b> olarak çok daha farklı (genelde daha düşük) fiyatlar görebilirsiniz.
         </div>
